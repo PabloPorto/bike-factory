@@ -21,8 +21,8 @@ public class Product implements Serializable {
     private Integer productId;
     private String name;
 
-    @Column(name = "productname")
-    private String productName;
+    @Column(name = "productnumber")
+    private String productNumber;
 
     @Column(name = "makeflag")
     private Integer makeFlag;
