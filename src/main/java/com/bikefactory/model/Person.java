@@ -1,16 +1,14 @@
 package com.bikefactory.model;
 
 import com.bikefactory.enums.PersonType;
-import org.springframework.data.annotation.Transient;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @NoArgsConstructor
 @Getter
@@ -20,23 +18,41 @@ public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer businessEntityId;
-    private PersonType personType;
-    private Integer nameStyle;
-    private String title;
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String suffix;
-    private Integer emailPromotion;
-    private String additionalContactInfo;
-    private String demographics;
-    private String rowGuide;
-    private LocalDateTime lastModified;
 
-    @Transient
-    public void modified() {
-        setLastModified(LocalDateTime.now());
-    }
+    @Column(name = "persontype")
+    private PersonType personType;
+
+    @Column(name = "namestyle")
+    private Integer nameStyle;
+
+    private String title;
+
+    @Column(name = "firstname")
+    private String firstName;
+
+    @Column(name = "middlename")
+    private String middleName;
+
+    @Column(name = "lastname")
+    private String lastName;
+
+    private String suffix;
+
+    @Column(name = "emailpromotion")
+    private Integer emailPromotion;
+
+    @Column(name = "additionalcontact")
+    private String additionalContactInfo;
+
+    private String demographics;
+
+    @Column(name = "rowguide")
+    private String rowGuide;
+
+    @Column(name = "modifieddate")
+    private Date modifiedDate;
 
 }

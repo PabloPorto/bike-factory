@@ -3,12 +3,9 @@ package com.bikefactory.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.Transient;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @NoArgsConstructor
@@ -19,35 +16,73 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "productid")
     private Integer productId;
     private String name;
-    private String productNumber;
+
+    @Column(name = "productname")
+    private String productName;
+
+    @Column(name = "makeflag")
     private Integer makeFlag;
+
+    @Column(name = "finishedgoodsflag")
     private Integer finishedGoodsFlag;
     private String color;
-    private Integer safetyStockLevel;
-    private Integer reorderPoint;
-    private Double standardCost;
-    private Double listPrice;
-    private String size;
-    private String sizeUnitMeasureCode;
-    private String weightUnitMeasureCode;
-    private Double weight;
-    private Integer daysToManufacture;
-    private String productLine;
-    private String classe;
-    private String style;
-    private Integer productSubcategoryId;
-    private Integer productModelId;
-    private Date sellStartDate;
-    private Date sellEndDate;
-    private Date discontinuedDate;
-    private String rowGuide;
-    private LocalDateTime lastModified;
 
-    @Transient
-    public void modified() {
-        setLastModified(LocalDateTime.now());
-    }
+    @Column(name = "safetystocklevel")
+    private Integer safetyStockLevel;
+
+    @Column(name = "reorderpoint")
+    private Integer reorderPoint;
+
+    @Column(name = "standardcost")
+    private Double standardCost;
+
+    @Column(name = "listprice")
+    private Double listPrice;
+
+    private String size;
+
+    @Column(name = "sizeunitmeasurecode")
+    private String sizeUnitMeasureCode;
+
+    @Column(name = "weightunitmeasurecode")
+    private String weightUnitMeasureCode;
+
+    private Double weight;
+
+    @Column(name = "daystomanufacture")
+    private Integer daysToManufacture;
+
+    @Column(name = "productline")
+    private String productLine;
+
+    @Column(name = "class")
+    private String classe;
+
+    private String style;
+
+    @Column(name = "productsubcategoryid")
+    private Integer productSubcategoryId;
+
+    @Column(name = "productmodelid")
+    private Integer productModelId;
+
+    @Column(name = "sellstartdate")
+    private Date sellStartDate;
+
+    @Column(name = "sellenddate")
+    private Date sellEndDate;
+
+    @Column(name = "discontinueddate")
+    private Date discontinuedDate;
+
+    @Column(name = "rowguide")
+    private String rowGuide;
+
+    @Column(name = "modifieddate")
+    private Date modifiedDate;
 
 }

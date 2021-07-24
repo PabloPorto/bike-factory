@@ -8,22 +8,30 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity(name = "specialofferproduct")
-public class SpecialOfferProduct implements Serializable {
+@Entity(name = "customer")
+public class Customer  implements Serializable {
     private static final long serialVersionUID = 1L;
-
-    @Column(name = "specialofferid")
-    private Integer specialOfferId;
-
-    @Column(name = "productid")
-    private Integer productId;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "customerid")
+    private Integer customerId;
+
+    @Column(name = "personid")
+    private Integer personId;
+
+    @Column(name = "storeid")
+    private Integer storeId;
+
+    @Column(name = "territoryid")
+    private Integer territoryId;
+
+    @Column(name = "accountnumber")
+    private String accountNumber;
+
     @Column(name = "rowguide")
     private String rowGuide;
 
