@@ -1,7 +1,6 @@
 package com.bikefactory.service.person_service;
 
 import com.bikefactory.exception.PersonNotFoundException;
-import com.bikefactory.model.Person;
 import com.bikefactory.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
