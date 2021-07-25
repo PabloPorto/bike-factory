@@ -1,5 +1,6 @@
 package com.bikefactory.model;
 
+import com.bikefactory.util.SalesOrderDetailRelationshipId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @Entity(name = "salesorderdetail")
+@IdClass(SalesOrderDetailRelationshipId.class)
 public class SalesOrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 

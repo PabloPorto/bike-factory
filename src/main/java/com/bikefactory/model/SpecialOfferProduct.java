@@ -1,5 +1,6 @@
 package com.bikefactory.model;
 
+import com.bikefactory.util.SpecialOfferProductRelationshipId;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @Entity(name = "specialofferproduct")
+@IdClass(SpecialOfferProductRelationshipId.class)
 public class SpecialOfferProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
