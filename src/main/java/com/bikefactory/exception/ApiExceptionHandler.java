@@ -59,6 +59,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(SalesOrderHeaderNotFoundException.class)
+    public ResponseEntity<Object> handleSalesOrderHeaderNotFoundException(SalesOrderHeaderNotFoundException ex,
+                                                                          WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        Problem problem = createProblemBuilder(SalesOrderHeaderNotFoundException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("Sales order header not found!");
+        return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders httpHeaders, HttpStatus status, WebRequest request) {
         if (body == null) {

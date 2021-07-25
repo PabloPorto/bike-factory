@@ -1,11 +1,11 @@
 package com.bikefactory.service.product_service;
 
 import com.bikefactory.dto.SaveOrUpdateProductDto;
-import com.bikefactory.exception.ProductNotFoundException;
 import com.bikefactory.exception.TableEmptyException;
 import com.bikefactory.model.Product;
 import com.bikefactory.repository.ProductRepository;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +38,8 @@ public class SaveProductServiceImpl implements SaveProductService{
         product.setModifiedDate(Date.from(Instant.now()));
         product.setRowGuide(rowGuide);
 
+        modelMapper.getConfiguration().setAmbiguityIgnored(true);
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         modelMapper.map(productDto,product);
         productRepository.save(product);
     }

@@ -18,7 +18,6 @@ public class SalesOrderHeader implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="salesorderid")
     private Integer salesOrderId;
 
@@ -34,10 +33,13 @@ public class SalesOrderHeader implements Serializable {
     @Column(name = "shipdate")
     private Date shipDate;
 
-    private String status;
+    private Integer status;
 
     @Column(name = "onlineorderflag")
     private Integer onlineOrderFlag;
+
+    @Column(name = "salesordernumber")
+    private String salesOrderNumber;
 
     @Column(name = "purchaseordernumber")
     private String purchaseOrderNumber;
