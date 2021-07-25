@@ -17,24 +17,24 @@ import org.springframework.web.bind.annotation.*;
 public class PersonController {
 
     @Autowired
-    private FetchPersonService fetchPersonService;
+    private SavePersonService savePersonService;
 
     @Autowired
-    private DeletePersonService deletePersonService;
+    private FetchPersonService fetchPersonService;
 
     @Autowired
     private UpdatePersonService updatePersonService;
 
     @Autowired
-    private SavePersonService savePersonService;
+    private DeletePersonService deletePersonService;
 
-    @GetMapping(value="/search-id/{id}")
+    @GetMapping(value="/fetch-by-id/{id}")
     public ResponseEntity<Object> findPerson(@PathVariable("id") Integer id){
         Person person = fetchPersonService.findPersonById(id);
         return ResponseEntity.ok().headers(new HttpHeaders()).body(person);
     }
 
-    @GetMapping(value="/search-row-guide/{rowGuide}")
+    @GetMapping(value="/fetch-by-rowguide/{rowGuide}")
     public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
         Person person = fetchPersonService.findPersonByRowGuide(rowGuide);
         return ResponseEntity.ok().headers(new HttpHeaders()).body(person);

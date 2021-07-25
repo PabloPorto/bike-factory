@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
     @Autowired
-    private FetchCustomerService fetchCustomerService;
+    private SaveCustomerService saveCustomerService;
 
     @Autowired
-    private SaveCustomerService saveCustomerService;
+    private FetchCustomerService fetchCustomerService;
 
     @Autowired
     private UpdateCustomerService updateCustomerService;
