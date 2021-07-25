@@ -1,26 +1,74 @@
 package com.bikefactory.controller;
 
+import com.bikefactory.dto.SaveOrUpdateCustomerRequestDto;
 import com.bikefactory.model.Customer;
-import com.bikefactory.service.CustomerService;
+import com.bikefactory.service.customer_service.DeleteCustomerService;
+import com.bikefactory.service.customer_service.FetchCustomerService;
+import com.bikefactory.service.customer_service.SaveCustomerService;
+import com.bikefactory.service.customer_service.UpdateCustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api")
+@RequestMapping(value = "/api/customer")
 public class CustomerController {
 
     @Autowired
-    private CustomerService customerService;
+    private FetchCustomerService fetchCustomerService;
 
-    @GetMapping(value="/{id}")
+    @Autowired
+    private SaveCustomerService saveCustomerService;
+
+    @Autowired
+    private UpdateCustomerService updateCustomerService;
+
+    @Autowired
+    private DeleteCustomerService deleteCustomerService;
+
+    @GetMapping(value="/search-id/{id}")
     public ResponseEntity<Object> findCustomer(@PathVariable("id") Integer id){
-        Customer customer = customerService.getCustomer(id);
+        Customer customer = fetchCustomerService.findCustomerById(id);
         return ResponseEntity.ok().headers(new HttpHeaders()).body(customer);
     }
+
+    @GetMapping(value="/search-account/{accountNumber}")
+    public ResponseEntity<Object> findCustomerByAccountNumber(@PathVariable("accountNumber") String accountNumber){
+        Customer customer = fetchCustomerService.findCustomerByAccount(accountNumber);
+        return ResponseEntity.ok().headers(new HttpHeaders()).body(customer);
+    }
+
+    @GetMapping(value="/search-row-guide/{rowGuide}")
+    public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
+        Customer customer = fetchCustomerService.findCustomerByRowGuide(rowGuide);
+        return ResponseEntity.ok().headers(new HttpHeaders()).body(customer);
+    }
+
+    @PostMapping
+    public ResponseEntity<Object> saveNewCustomer(@RequestBody SaveOrUpdateCustomerRequestDto saveOrUpdateCustomerRequestDto){
+        saveCustomerService.insertNewCustomer(saveOrUpdateCustomerRequestDto);
+        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @PutMapping(value="/update/{customerId}")
+    public ResponseEntity<Object> update(@PathVariable ("customerId") Integer customerId,
+                                         @RequestBody SaveOrUpdateCustomerRequestDto saveOrUpdateCustomerRequestDto){
+        updateCustomerService.updateCustomer(saveOrUpdateCustomerRequestDto,customerId);
+        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/delete-id/{customerId}")
+    public ResponseEntity<Object> deleteById(@PathVariable ("customerId") Integer customerId){
+        deleteCustomerService.removeCustomerById(customerId);
+        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/delete-account/{account}")
+    public ResponseEntity<Object> deleteById(@PathVariable ("account") String account){
+        deleteCustomerService.removeCustomerByAccount(account);
+        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
+    }
+
 }

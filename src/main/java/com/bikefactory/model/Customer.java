@@ -18,7 +18,6 @@ public class Customer  implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "customerid")
     private Integer customerId;
 
@@ -45,4 +44,11 @@ public class Customer  implements Serializable {
 
     @OneToMany
     private List<SalesOrderHeader> salesOrderHeaders = new ArrayList<>();
+
+    public Customer(Integer personId, Integer storeId, Integer territoryId, String accountNumber) {
+        this.personId = personId;
+        this.storeId = storeId;
+        this.territoryId = territoryId;
+        this.accountNumber = accountNumber;
+    }
 }

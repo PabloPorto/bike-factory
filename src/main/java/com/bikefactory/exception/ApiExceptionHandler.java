@@ -27,6 +27,30 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(PersonNotFoundException.class)
+    public ResponseEntity<Object> handlePersonNotFoundException(PersonNotFoundException ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        Problem problem = createProblemBuilder(PersonNotFoundException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("Person not found");
+        return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(RowGuidNotFoundException.class)
+    public ResponseEntity<Object> handleRowGuideMustBeUniqueException(RowGuidNotFoundException ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        Problem problem = createProblemBuilder(RowGuidNotFoundException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("RowGuide not found!");
+        return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(CustomerTableEmptyException.class)
+    public ResponseEntity<Object> handleCustomerTableEmptyException(CustomerTableEmptyException ex, WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        Problem problem = createProblemBuilder(CustomerTableEmptyException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("Customer table is empty!");
+        return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders httpHeaders, HttpStatus status, WebRequest request) {
         if (body == null) {
