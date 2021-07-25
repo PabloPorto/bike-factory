@@ -1,10 +1,8 @@
 package com.bikefactory.controller;
 
-import com.bikefactory.dto.SaveOrUpdateSpecialOfferDto;
 import com.bikefactory.model.SpecialOfferProduct;
 import com.bikefactory.service.special_offer_product_service.DeleteSpecialOfferService;
 import com.bikefactory.service.special_offer_product_service.FetchSpecialOfferService;
-import com.bikefactory.service.special_offer_product_service.SaveSpecialOfferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,9 +17,6 @@ public class SpecialOfferProductController {
 
     @Autowired
     private FetchSpecialOfferService fetchSpecialOfferService;
-
-    @Autowired
-    private SaveSpecialOfferService saveSpecialOfferService;
 
     @GetMapping(value = "/offers")
     public ResponseEntity<Object> findById(@RequestParam("specialOfferId") Integer specialOfferId,
@@ -47,11 +42,5 @@ public class SpecialOfferProductController {
     public ResponseEntity<Object> deleteByRowGuide(@PathVariable("rowGuide") String rowGuide){
         deleteSpecialOfferService.deleteByRowGuide(rowGuide);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping
-    public ResponseEntity<Object> saveOrderDetail(@RequestBody SaveOrUpdateSpecialOfferDto saveOrUpdateSalesOrderDetailDto){
-        saveSpecialOfferService.saveSpecialOffer(saveOrUpdateSalesOrderDetailDto);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

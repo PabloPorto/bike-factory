@@ -12,5 +12,4 @@ public interface SpecialOfferProductRepository extends JpaRepository<SpecialOffe
 
     Optional<SpecialOfferProduct> findByRowGuide (String rowGuide);
 
-    Optional<SpecialOfferProduct> findFirstByOrderByRowGuideDesc(String rowGuide);
 }
