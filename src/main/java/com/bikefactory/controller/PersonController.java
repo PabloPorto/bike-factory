@@ -1,6 +1,5 @@
 package com.bikefactory.controller;
 
-import com.bikefactory.dto.SaveOrUpdateCustomerRequestDto;
 import com.bikefactory.dto.SaveOrUpdatePersonDto;
 import com.bikefactory.model.Person;
 import com.bikefactory.service.person_service.DeletePersonService;
@@ -56,6 +55,13 @@ public class PersonController {
     @PostMapping
     public ResponseEntity<Object> saveNewPerson(@RequestBody SaveOrUpdatePersonDto saveOrUpdatePersonDto){
         savePersonService.insertNewPerson(saveOrUpdatePersonDto);
+        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @PutMapping(value="/update/{id}")
+    public ResponseEntity<Object> update(@PathVariable ("id") Integer id,
+                                         @RequestBody SaveOrUpdatePersonDto saveOrUpdatePersonDto){
+        updatePersonService.update(saveOrUpdatePersonDto,id);
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
     }
 
