@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/special-offer")
+@RequestMapping(value = "/bike-factory/special-offer")
 public class SpecialOfferProductController {
 
     @Autowired
@@ -23,27 +23,27 @@ public class SpecialOfferProductController {
     @Autowired
     private SaveSpecialOfferService saveSpecialOfferService;
 
-    @GetMapping(value="/fetch-by-id")
+    @GetMapping(value = "/offers")
     public ResponseEntity<Object> findById(@RequestParam("specialOfferId") Integer specialOfferId,
                                            @RequestParam("productId") Integer productId){
         SpecialOfferProduct specialOfferProduct = fetchSpecialOfferService.findById(specialOfferId,productId);
         return ResponseEntity.status(HttpStatus.OK).body(specialOfferProduct);
     }
 
-    @GetMapping(value="/fetch-by-rowguide/{rowGuide}")
+    @GetMapping(value="/rowguide/{rowGuide}")
     public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
         SpecialOfferProduct specialOfferProduct = fetchSpecialOfferService.findByRowGuide(rowGuide);
         return ResponseEntity.status(HttpStatus.OK).body(specialOfferProduct);
     }
 
-    @DeleteMapping(value = "/delete-by-id")
+    @DeleteMapping(value = "/id")
     public ResponseEntity<Object> deleteById(@RequestParam("specialOfferId") Integer specialOfferId,
                                              @RequestParam("productId") Integer productId){
         deleteSpecialOfferService.deleteById(specialOfferId,productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value="/delete-by-rowguide/{rowGuide}")
+    @DeleteMapping(value="/rowguide/{rowGuide}")
     public ResponseEntity<Object> deleteByRowGuide(@PathVariable("rowGuide") String rowGuide){
         deleteSpecialOfferService.deleteByRowGuide(rowGuide);
         return new ResponseEntity<>(HttpStatus.OK);

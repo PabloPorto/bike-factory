@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 
 @RestController
-@RequestMapping(value = "/api/order-header")
+@RequestMapping(value = "/bike-factory/order-header")
 public class SalesOrderHeaderController {
 
     @Autowired
@@ -30,37 +30,37 @@ public class SalesOrderHeaderController {
     @Autowired
     private UpdateSalesOrderHeaderService updateSalesOrderHeaderService;
 
-    @DeleteMapping(value = "/delete-by-id/{orderId}")
+    @DeleteMapping(value = "/{orderId}")
     public ResponseEntity<Object> deleteById(@PathVariable("orderId") Integer orderId){
         deleteSalesOrderHeaderService.deleteById(orderId);
         return new ResponseEntity<>(new HttpHeaders(),HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-number/{orderNumber}")
+    @DeleteMapping(value = "/number/{orderNumber}")
     public ResponseEntity<Object> deleteByNumber(@PathVariable("orderNumber") String orderNumber){
         deleteSalesOrderHeaderService.deleteBySalesOrderNumber(orderNumber);
         return new ResponseEntity<>(new HttpHeaders(),HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-rowguide/{rowGuide}")
+    @DeleteMapping(value = "/rowguide/{rowGuide}")
     public ResponseEntity<Object> deleteByRowGuide(@PathVariable("rowGuide") String rowGuide){
         deleteSalesOrderHeaderService.deleteByRowGuide(rowGuide);
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/fetch-by-id/{orderId}")
+    @GetMapping(value = "/{orderId}")
     public ResponseEntity<Object> findByid(@PathVariable("orderId") Integer orderId){
         SalesOrderHeader salesOrderHeader = fetchSalesOrderHeaderService.findByOrderId(orderId);
         return ResponseEntity.status(HttpStatus.OK).body(salesOrderHeader);
     }
 
-    @GetMapping(value = "/fetch-by-SalesNumber/{salesNumber}")
+    @GetMapping(value = "/number/{salesNumber}")
     public ResponseEntity<Object> findBySalesNumber(@PathVariable("salesNumber") String salesNumber){
         SalesOrderHeader salesOrderHeader = fetchSalesOrderHeaderService.findBySalesNumber(salesNumber);
         return ResponseEntity.status(HttpStatus.OK).body(salesOrderHeader);
     }
 
-    @GetMapping(value = "/fetch-by-rowguide/{rowGuide}")
+    @GetMapping(value = "/rowguide/{rowGuide}")
     public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
         SalesOrderHeader salesOrderHeader = fetchSalesOrderHeaderService.findByRow(rowGuide);
         return ResponseEntity.status(HttpStatus.OK).body(salesOrderHeader);
@@ -72,7 +72,7 @@ public class SalesOrderHeaderController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping(value = "/update/{orderId}")
+    @PutMapping(value = "/{orderId}")
     public ResponseEntity<Object> updateSalesHeader(@RequestBody SaveOrUpdateSalesOrderHeaderDto saveOrUpdateSalesOrderHeaderDto,
                                                     @PathVariable("orderId") Integer orderId) throws ParseException{
         updateSalesOrderHeaderService.update(saveOrUpdateSalesOrderHeaderDto, orderId);

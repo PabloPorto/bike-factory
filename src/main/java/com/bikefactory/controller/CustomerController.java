@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value = "/api/customer")
+@RequestMapping(value = "/bike-factory/customer")
 public class CustomerController {
 
     @Autowired
@@ -27,19 +27,19 @@ public class CustomerController {
     @Autowired
     private DeleteCustomerService deleteCustomerService;
 
-    @GetMapping(value="/fetch-by-id/{id}")
+    @GetMapping(value="/{id}")
     public ResponseEntity<Object> findCustomer(@PathVariable("id") Integer id){
         Customer customer = fetchCustomerService.findCustomerById(id);
         return ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
-    @GetMapping(value="/fetch-by-account/{accountNumber}")
+    @GetMapping(value="/account/{accountNumber}")
     public ResponseEntity<Object> findCustomerByAccountNumber(@PathVariable("accountNumber") String accountNumber){
         Customer customer = fetchCustomerService.findCustomerByAccount(accountNumber);
         return ResponseEntity.status(HttpStatus.OK).body(customer);
     }
 
-    @GetMapping(value="/fetch-rowguide/{rowGuide}")
+    @GetMapping(value="/rowguide/{rowGuide}")
     public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
         Customer customer = fetchCustomerService.findCustomerByRowGuide(rowGuide);
         return ResponseEntity.status(HttpStatus.OK).body(customer);
@@ -51,20 +51,20 @@ public class CustomerController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping(value="/update/{customerId}")
+    @PutMapping(value="/data/{customerId}")
     public ResponseEntity<Object> update(@PathVariable ("customerId") Integer customerId,
                                          @RequestBody SaveOrUpdateCustomerRequestDto saveOrUpdateCustomerRequestDto){
         updateCustomerService.updateCustomer(saveOrUpdateCustomerRequestDto,customerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-id/{customerId}")
+    @DeleteMapping(value = "/data-id/{customerId}")
     public ResponseEntity<Object> deleteById(@PathVariable ("customerId") Integer customerId){
         deleteCustomerService.removeCustomerById(customerId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-account/{account}")
+    @DeleteMapping(value = "/data-account/{account}")
     public ResponseEntity<Object> deleteById(@PathVariable ("account") String account){
         deleteCustomerService.removeCustomerByAccount(account);
         return new ResponseEntity<>(HttpStatus.OK);

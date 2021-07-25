@@ -20,7 +20,7 @@ import java.text.ParseException;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/api/product")
+@RequestMapping(value = "/bike-factory/product")
 public class ProductController {
 
     @Autowired
@@ -35,27 +35,27 @@ public class ProductController {
     @Autowired
     private DeleteProductService deleteProductService;
 
-    @GetMapping(value="/fetch-by-id/{productId}")
+    @GetMapping(value="{productId}")
     public ResponseEntity<Object> findProdById(@PathVariable("productId") Integer productId){
         Product product = fetchProductService.findProductById(productId);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
-    @GetMapping(value="/fetch-by-rowguide/{rowGuide}")
+    @GetMapping(value="/rowguide/{rowGuide}")
     public ResponseEntity<Object> findProdByRowGuide(@PathVariable("rowGuide") String rowGuide){
         Product product = fetchProductService.findProductByRowGuide(rowGuide);
         return ResponseEntity.status(HttpStatus.OK).body(product);
 
     }
 
-    @GetMapping(value="/fetch-by-name/{name}")
+    @GetMapping(value="/name/{name}")
     public ResponseEntity<Object> findProdByName(@PathVariable("name") String name){
         Product product = fetchProductService.findProductByName(name);
         return ResponseEntity.status(HttpStatus.OK).body(product);
 
     }
 
-    @GetMapping(value="/fetch-by-product-number/{productNumber}")
+    @GetMapping(value="/product-number/{productNumber}")
     public ResponseEntity<Object> findByProdNumber(@PathVariable("productNumber") String productNumber){
         Product product = fetchProductService.findProductByProductNumber(productNumber);
         return ResponseEntity.status(HttpStatus.OK).body(product);
@@ -72,7 +72,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "/update/{productId}")
+    @PutMapping(value = "/{productId}")
     public ResponseEntity<Object> updateProduct(@PathVariable("productId") Integer productId,
                                                 @Valid @RequestBody SaveOrUpdateProductDto productDto,
                                                 Errors errors) throws ParseException {
@@ -83,25 +83,25 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-id/{productId}")
+    @DeleteMapping(value = "/{productId}")
     public ResponseEntity<Object> deleteById(@PathVariable ("productId") Integer productId){
         deleteProductService.deleteByProductId(productId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-name/{productName}")
+    @DeleteMapping(value = "/name/{productName}")
     public ResponseEntity<Object> deleteByName(@PathVariable ("productName") String productName){
         deleteProductService.deleteByProductName(productName);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-by-number/{productNumber}")
+    @DeleteMapping(value = "/product-number/{productNumber}")
     public ResponseEntity<Object> deleteByNumber(@PathVariable ("productNumber") String productNumber){
         deleteProductService.deleteByProductNumber(productNumber);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @DeleteMapping(value = "/delete-rowguide/{rowGuide}")
+    @DeleteMapping(value = "/rowguide/{rowGuide}")
     public ResponseEntity<Object> deleteByRowGuide(@PathVariable ("rowGuide") String rowGuide){
         deleteProductService.deleteByRowGuide(rowGuide);
         return new ResponseEntity<>(HttpStatus.OK);
