@@ -23,6 +23,7 @@ public class Person implements Serializable {
     private Integer businessEntityId;
 
     @Column(name = "persontype")
+    @Enumerated(EnumType.STRING)
     private PersonType personType;
 
     @Column(name = "namestyle")

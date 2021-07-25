@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -49,5 +51,8 @@ public class SalesOrderDetail implements Serializable {
 
     @Column(name = "modifieddate")
     private Date modifiedDate;
+
+    @OneToMany(mappedBy = "productId")
+    private List<SpecialOfferProduct> specialOfferProduct = new ArrayList<>();
 
 }
