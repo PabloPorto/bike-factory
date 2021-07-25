@@ -77,6 +77,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(SpecialOfferNotFoundException.class)
+    public ResponseEntity<Object> handleSpecialOfferNotFoundException(SpecialOfferNotFoundException ex,
+                                                                          WebRequest request){
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        Problem problem = createProblemBuilder(SpecialOfferNotFoundException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("Special offer not found!");
+        return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders httpHeaders, HttpStatus status, WebRequest request) {
         if (body == null) {
