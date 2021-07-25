@@ -28,19 +28,19 @@ public class CustomerController {
     @Autowired
     private DeleteCustomerService deleteCustomerService;
 
-    @GetMapping(value="/search-id/{id}")
+    @GetMapping(value="/fetch-by-id/{id}")
     public ResponseEntity<Object> findCustomer(@PathVariable("id") Integer id){
         Customer customer = fetchCustomerService.findCustomerById(id);
         return ResponseEntity.ok().headers(new HttpHeaders()).body(customer);
     }
 
-    @GetMapping(value="/search-account/{accountNumber}")
+    @GetMapping(value="/fetch-by-account/{accountNumber}")
     public ResponseEntity<Object> findCustomerByAccountNumber(@PathVariable("accountNumber") String accountNumber){
         Customer customer = fetchCustomerService.findCustomerByAccount(accountNumber);
         return ResponseEntity.ok().headers(new HttpHeaders()).body(customer);
     }
 
-    @GetMapping(value="/search-row-guide/{rowGuide}")
+    @GetMapping(value="/fetch-rowguide/{rowGuide}")
     public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
         Customer customer = fetchCustomerService.findCustomerByRowGuide(rowGuide);
         return ResponseEntity.ok().headers(new HttpHeaders()).body(customer);
@@ -59,13 +59,13 @@ public class CustomerController {
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/delete-id/{customerId}")
+    @DeleteMapping(value = "/delete-by-id/{customerId}")
     public ResponseEntity<Object> deleteById(@PathVariable ("customerId") Integer customerId){
         deleteCustomerService.removeCustomerById(customerId);
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/delete-account/{account}")
+    @DeleteMapping(value = "/delete-by-account/{account}")
     public ResponseEntity<Object> deleteById(@PathVariable ("account") String account){
         deleteCustomerService.removeCustomerByAccount(account);
         return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);

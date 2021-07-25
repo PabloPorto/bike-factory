@@ -43,11 +43,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
     }
 
-    @ExceptionHandler(CustomerTableEmptyException.class)
-    public ResponseEntity<Object> handleCustomerTableEmptyException(CustomerTableEmptyException ex, WebRequest request){
+    @ExceptionHandler(TableEmptyException.class)
+    public ResponseEntity<Object> handleCustomerTableEmptyException(TableEmptyException ex, WebRequest request){
         HttpStatus status = HttpStatus.NOT_FOUND;
-        Problem problem = createProblemBuilder(CustomerTableEmptyException.EXCEPTION_CODE, Collections.emptyList()).build();
-        LOG.warn("Customer table is empty!");
+        Problem problem = createProblemBuilder(TableEmptyException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("This table is empty!");
         return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
     }
 

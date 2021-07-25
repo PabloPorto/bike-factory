@@ -21,7 +21,6 @@ public class Person implements Serializable {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer businessEntityId;
 
     @Column(name = "persontype")
