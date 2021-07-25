@@ -38,25 +38,28 @@ public class ProductController {
     @GetMapping(value="/fetch-by-id/{productId}")
     public ResponseEntity<Object> findProdById(@PathVariable("productId") Integer productId){
         Product product = fetchProductService.findProductById(productId);
-        return ResponseEntity.ok().headers(getHttpHeaders()).body(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
     }
 
     @GetMapping(value="/fetch-by-rowguide/{rowGuide}")
     public ResponseEntity<Object> findProdByRowGuide(@PathVariable("rowGuide") String rowGuide){
         Product product = fetchProductService.findProductByRowGuide(rowGuide);
-        return ResponseEntity.ok().headers(getHttpHeaders()).body(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
+
     }
 
     @GetMapping(value="/fetch-by-name/{name}")
     public ResponseEntity<Object> findProdByName(@PathVariable("name") String name){
         Product product = fetchProductService.findProductByName(name);
-        return ResponseEntity.ok().headers(getHttpHeaders()).body(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
+
     }
 
     @GetMapping(value="/fetch-by-product-number/{productNumber}")
     public ResponseEntity<Object> findByProdNumber(@PathVariable("productNumber") String productNumber){
         Product product = fetchProductService.findProductByProductNumber(productNumber);
-        return ResponseEntity.ok().headers(getHttpHeaders()).body(product);
+        return ResponseEntity.status(HttpStatus.OK).body(product);
+
     }
 
     @PostMapping
@@ -66,7 +69,7 @@ public class ProductController {
             return validationErrorResponse(errors);
         }
         saveProductService.insertNewProduct(productDto);
-        return new ResponseEntity<>(getHttpHeaders(),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/update/{productId}")
@@ -77,31 +80,31 @@ public class ProductController {
             return validationErrorResponse(errors);
         }
         updateProductService.updateProduct(productDto,productId);
-        return new ResponseEntity<>(getHttpHeaders(),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete-by-id/{productId}")
     public ResponseEntity<Object> deleteById(@PathVariable ("productId") Integer productId){
         deleteProductService.deleteByProductId(productId);
-        return new ResponseEntity<>(getHttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete-by-name/{productName}")
     public ResponseEntity<Object> deleteByName(@PathVariable ("productName") String productName){
         deleteProductService.deleteByProductName(productName);
-        return new ResponseEntity<>(getHttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete-by-number/{productNumber}")
     public ResponseEntity<Object> deleteByNumber(@PathVariable ("productNumber") String productNumber){
         deleteProductService.deleteByProductNumber(productNumber);
-        return new ResponseEntity<>(getHttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete-rowguide/{rowGuide}")
     public ResponseEntity<Object> deleteByRowGuide(@PathVariable ("rowGuide") String rowGuide){
         deleteProductService.deleteByRowGuide(rowGuide);
-        return new ResponseEntity<>(new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     private HttpHeaders getHttpHeaders() {

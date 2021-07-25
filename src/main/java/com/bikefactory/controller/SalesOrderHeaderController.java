@@ -51,32 +51,32 @@ public class SalesOrderHeaderController {
     @GetMapping(value = "/fetch-by-id/{orderId}")
     public ResponseEntity<Object> findByid(@PathVariable("orderId") Integer orderId){
         SalesOrderHeader salesOrderHeader = fetchSalesOrderHeaderService.findByOrderId(orderId);
-        return ResponseEntity.ok().headers(new HttpHeaders()).body(salesOrderHeader);
+        return ResponseEntity.status(HttpStatus.OK).body(salesOrderHeader);
     }
 
     @GetMapping(value = "/fetch-by-SalesNumber/{salesNumber}")
-    public ResponseEntity<Object> findBySalesNumber(@PathVariable("SalesNumber") String salesNumber){
+    public ResponseEntity<Object> findBySalesNumber(@PathVariable("salesNumber") String salesNumber){
         SalesOrderHeader salesOrderHeader = fetchSalesOrderHeaderService.findBySalesNumber(salesNumber);
-        return ResponseEntity.ok().headers(new HttpHeaders()).body(salesOrderHeader);
+        return ResponseEntity.status(HttpStatus.OK).body(salesOrderHeader);
     }
 
     @GetMapping(value = "/fetch-by-rowguide/{rowGuide}")
     public ResponseEntity<Object> findByRowGuide(@PathVariable("rowGuide") String rowGuide){
         SalesOrderHeader salesOrderHeader = fetchSalesOrderHeaderService.findByRow(rowGuide);
-        return ResponseEntity.ok().headers(new HttpHeaders()).body(salesOrderHeader);
+        return ResponseEntity.status(HttpStatus.OK).body(salesOrderHeader);
     }
 
     @PostMapping
     public ResponseEntity<Object> saveSalesHeader(@RequestBody SaveOrUpdateSalesOrderHeaderDto saveOrUpdateSalesOrderHeaderDto) throws ParseException {
         saveSalesOrderHeaderService.insertNewSalesOrderHeader(saveOrUpdateSalesOrderHeaderDto);
-        return new ResponseEntity<>(new HttpHeaders(),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PutMapping(value = "/update/{orderId}")
     public ResponseEntity<Object> updateSalesHeader(@RequestBody SaveOrUpdateSalesOrderHeaderDto saveOrUpdateSalesOrderHeaderDto,
                                                     @PathVariable("orderId") Integer orderId) throws ParseException{
         updateSalesOrderHeaderService.update(saveOrUpdateSalesOrderHeaderDto, orderId);
-        return new ResponseEntity<>(new HttpHeaders(),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
 }
