@@ -1,10 +1,12 @@
 package com.bikefactory.service.customer_service;
 
 import com.bikefactory.dto.SaveOrUpdateCustomerRequestDto;
+import com.bikefactory.exception.ConstraintViolationException;
 import com.bikefactory.exception.TableEmptyException;
 import com.bikefactory.model.Customer;
 import com.bikefactory.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -29,6 +31,12 @@ public class SaveCustomerServiceImpl implements SaveCustomerService{
         customer.setRowGuide(rowGuide);
         customer.setModifiedDate(Date.from(Instant.now()));
         customer.setCustomerId(lastInserted.getCustomerId()+1);
-        customerRepository.save(customer);
+
+        try{
+            customerRepository.save(customer);
+        }catch (DataIntegrityViolationException ex){
+            throw new ConstraintViolationException();
+        }
+
     }
 }

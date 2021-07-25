@@ -86,6 +86,15 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleConstraintViolationException(ConstraintViolationException ex,
+                                                                            WebRequest request){
+        HttpStatus status = HttpStatus.CONFLICT;
+        Problem problem = createProblemBuilder(ConstraintViolationException.EXCEPTION_CODE, Collections.emptyList()).build();
+        LOG.warn("Conflict! Account number already exists");
+        return handleExceptionInternal(ex, problem, getHttpHeaders(), status, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders httpHeaders, HttpStatus status, WebRequest request) {
         if (body == null) {
