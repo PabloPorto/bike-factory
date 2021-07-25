@@ -1,5 +1,6 @@
 package com.bikefactory.service;
 
+import com.bikefactory.exception.CustomerNotFoundException;
 import com.bikefactory.model.Customer;
 import com.bikefactory.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,6 @@ public class CustomerServiceImpl implements CustomerService{
 
     @Override
     public Customer getCustomer(Integer customerId) {
-        return customerRepository.findById(customerId).get();
+        return customerRepository.findById(customerId).orElseThrow(CustomerNotFoundException::new);
     }
 }
