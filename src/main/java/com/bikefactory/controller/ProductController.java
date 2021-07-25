@@ -55,7 +55,7 @@ public class ProductController {
 
     @GetMapping(value="/fetch-by-product-number/{productNumber}")
     public ResponseEntity<Object> findByProdNumber(@PathVariable("productNumber") String productNumber){
-        Product product = fetchProductService.findProductByName(productNumber);
+        Product product = fetchProductService.findProductByProductNumber(productNumber);
         return ResponseEntity.ok().headers(getHttpHeaders()).body(product);
     }
 
