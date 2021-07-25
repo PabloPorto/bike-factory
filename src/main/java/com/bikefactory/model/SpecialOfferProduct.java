@@ -6,7 +6,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -16,18 +18,24 @@ import java.util.Date;
 public class SpecialOfferProduct implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @Id
     @Column(name = "specialofferid")
     private Integer specialOfferId;
 
+    @Id
     @Column(name = "productid")
     private Integer productId;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "rowguide")
+    @Column(name = "rowguide", unique = true)
     private String rowGuide;
 
     @Column(name = "modifieddate")
     private Date modifiedDate;
+
+    @OneToMany
+    private List<SalesOrderDetail> salesOrderDetails = new ArrayList<>();
+
+    @ManyToOne
+    private Product product;
 
 }

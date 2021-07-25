@@ -6,9 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter
@@ -18,10 +16,10 @@ public class SalesOrderDetail implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "salesorderid")
     private Integer salesOrderId;
 
+    @Id
     @Column(name = "salesorderdetailid")
     private Integer salesOrderDetailId;
 
@@ -46,13 +44,18 @@ public class SalesOrderDetail implements Serializable {
     @Column(name = "linetotal")
     private String lineTotal;
 
-    @Column(name = "rowguide")
+    @Column(name = "rowguide", unique = true)
     private String rowGuide;
 
     @Column(name = "modifieddate")
     private Date modifiedDate;
 
-    @OneToMany(mappedBy = "productId")
-    private List<SpecialOfferProduct> specialOfferProduct = new ArrayList<>();
+    @ManyToOne
+    private SpecialOfferProduct specialOfferProduct;
 
+    @ManyToOne
+    private Product product;
+
+    @ManyToOne
+    private SalesOrderHeader salesOrderHeader;
 }

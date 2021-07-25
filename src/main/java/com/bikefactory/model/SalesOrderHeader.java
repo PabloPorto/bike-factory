@@ -89,6 +89,6 @@ public class SalesOrderHeader implements Serializable {
     @Column(name = "modifieddate")
     private Date modifiedDate;
 
-    @OneToMany(mappedBy = "salesOrderId")
+    @OneToMany
     private List<SalesOrderDetail> salesOrderDetails = new ArrayList<>();
 }

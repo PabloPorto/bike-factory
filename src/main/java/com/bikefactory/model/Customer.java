@@ -40,6 +40,9 @@ public class Customer  implements Serializable {
     @Column(name = "modifieddate")
     private Date modifiedDate;
 
-    @OneToMany(mappedBy = "salesOrderId")
+    @ManyToOne
+    private Person person;
+
+    @OneToMany
     private List<SalesOrderHeader> salesOrderHeaders = new ArrayList<>();
 }
