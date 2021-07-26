@@ -27,7 +27,7 @@ public class OrderDetailController {
     @Autowired
     private UpdateOrderDetailService updateOrderDetailService;
 
-    @GetMapping(value="/{id}/orders")
+    @GetMapping(value="/orders")
     public ResponseEntity<Object> findOrderDetailById(@RequestParam("salesOrderId") Integer salesOrderId,
                                                       @RequestParam("salesOrderDetailId") Integer salesOrderDetailId){
         SalesOrderDetail salesOrderDetail = fetchOrderDetailService.findById(salesOrderId,salesOrderDetailId);
