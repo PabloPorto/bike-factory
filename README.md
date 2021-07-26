@@ -15,5 +15,6 @@ A arquitetura REST foi escolhida em razões de alguns pontos chave:
 Dadas as tabelas em formato .csv o primeiro passo foi fazer uma análise detalhadas de todos os atributos do header, buscando identificar num primeiro momento as possiveis associações, identificadores únicos, relacionamentos, entidades fracas e fortes, etc. Num segundo momento foi impresindível o mapeamento para um diagrama que se assemelha ao de classes (não foi feito dentro dos padrões técnicos academicos mas foi importante para a compreensão do problema). Este artificio possibilitou uma grande compreensão do escopo do problema e a partir daí então o pensamento mais técnico das criações das tabelas para popular o banco de dados foi iniciado.
 
 O Sistema de gerenciamento de banco de dados escolhido foi o PostgreSQL dada a ambientação prévia que tnha com o mesmo e por nunca ter tido problemas de desempenho por lá.
-
 Link do diagrama citado anteriormente: (https://github.com/PabloPorto/bike-factory/files/6875239/UML.-.Seletiva-Final.pdf)
+
+Enfrentei problemas de configuração com meu acesso à nuvem, as minhas requisições à aws pelo postman só me retornavam bad request (quando eu errava de propósito algum parametro) ou timeout, o lado negativo de se ter pouco tempo (haja vista que as atividades do cotidiano não permitiram uma liberdade maior) é a dificuldade ao enfrentar tais problemas de configuração de ambiente.
