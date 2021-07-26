@@ -16,4 +16,4 @@ Dadas as tabelas em formato .csv o primeiro passo foi fazer uma análise detalha
 
 O Sistema de gerenciamento de banco de dados escolhido foi o PostgreSQL dada a ambientação prévia que tnha com o mesmo e por nunca ter tido problemas de desempenho por lá.
 
-
+Link do diagrama citado anteriormente: (https://github.com/PabloPorto/bike-factory/files/6875239/UML.-.Seletiva-Final.pdf)
